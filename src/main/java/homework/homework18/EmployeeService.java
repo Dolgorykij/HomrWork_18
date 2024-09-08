@@ -3,6 +3,8 @@ import homework.homework18.Employee;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class EmployeeService implements EmployeeServiceInterface {
@@ -14,8 +16,6 @@ public class EmployeeService implements EmployeeServiceInterface {
         this.employeeList.add(new Employee("Sara","Conor"));
         this.employeeList.add(new Employee("Sara1","Conor1"));
         this.employeeList.add(new Employee("Sara2","Conor2"));
-        this.employeeList.add(new Employee("Sara3","Conor3"));
-        this.employeeList.add(new Employee("Sara3","Con3or3"));
     }
 
     @Override
@@ -49,6 +49,11 @@ public class EmployeeService implements EmployeeServiceInterface {
         } else {
             throw new EmployeeNotFoundException("Человек не найден");
         }
+    }
+
+    @Override
+    public List<Employee> workerks() {
+        return employeeList;
     }
 
 }

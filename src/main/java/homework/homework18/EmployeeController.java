@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
@@ -17,15 +19,15 @@ public class EmployeeController {
         return "Hello";
     }
     @GetMapping("/add")
-    public String add (@RequestParam ("firstName") String firstName,
+    public Employee add (@RequestParam ("firstName") String firstName,
                        @RequestParam ("lastName") String lastName) {
-        try {
-            final Employee employee = employeeService.add(firstName,lastName);
-            return firstName + lastName;
-           // return employeeService.add(firstName,lastName);
-        } catch (EmployeeAlreadyAddedException e) {
-            return "Пользователь" + firstName + " " + lastName + " уже добавлен";
-        }
+       // try {
+           // final Employee employee = employeeService.add(firstName,lastName);
+           // return firstName + lastName;
+            return employeeService.add(firstName,lastName);
+       // } catch (EmployeeAlreadyAddedException e) {
+          //  return "Пользователь" + firstName + " " + lastName + " уже добавлен";
+       // }
     }
 
     @GetMapping("/remove")
@@ -36,17 +38,16 @@ public class EmployeeController {
     @GetMapping("/find")
     public Employee find    (@RequestParam  ("firstName") String firstName,
                              @RequestParam  ("lastName")  String lastName) {
-        try {
-            final Employee employee = employeeService.find(firstName, lastName);
-            return employeeService.remove(firstName,lastName);
-        }   catch (EmployeeNotFoundException e) {
-            return employeeService.remove(firstName,lastName);
-        }
-        //return employeeService.find(firstName, lastName);
+        //try {
+           // final Employee employee = employeeService.find(firstName, lastName);
+           // return employeeService.remove(firstName,lastName);
+      //  }   catch (EmployeeNotFoundException e) {
+          //  return employeeService.remove(firstName,lastName);
+      //  }
+        return employeeService.find(firstName, lastName);
     }
-
-
-
-
-
+    @GetMapping("/workers")
+    public List<Employee> workers () {
+        return employeeService.workerks();
+    }
 }
